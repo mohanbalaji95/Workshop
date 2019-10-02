@@ -1,7 +1,6 @@
 package com.miraclesoft.entity;
 
-import java.util.Random;
-import java.util.UUID;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
