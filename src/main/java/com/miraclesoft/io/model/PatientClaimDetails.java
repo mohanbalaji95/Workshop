@@ -6,28 +6,37 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="PATIENT_CLAIM_DETAILS")
 public class PatientClaimDetails {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="CLAIM_ID")
 	private int claimId;
 	@Column(name="PID")
+//	@NotBlank(message="PID is mandatory")
 	private int pId;
 	@Column(name="PHY_ID")
+//	@NotBlank(message="PhyID is mandatory")
 	private int phyId;
 	@Column(name="TOTAL_AMOUNT")
+//	@NotBlank(message="Total amount is mandatory")
 	private int totalAmount;
 	@Column(name="PAID_AMOUNT")
+//	@NotBlank(message="Paid amount is mandatory")
 	private int paidAmount;
 	@Column(name="DATE")
+//	@NotBlank(message="Date is mandatory")
 	private String date;
 	@Column(name="HOSPITAL")
+//	@NotBlank(message="Hospital is mandatory")
 	private String hospital;
 	
 	
+
+
 	public PatientClaimDetails() {
 		super();
 		// TODO Auto-generated constructor stub

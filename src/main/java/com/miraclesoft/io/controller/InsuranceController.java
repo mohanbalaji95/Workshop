@@ -3,8 +3,12 @@ package com.miraclesoft.io.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.miraclesoft.io.model.PatientClaimDetails;
@@ -26,19 +30,33 @@ public class InsuranceController {
 		return patientClaimDetailsService.findAll();
 	}
 	
+	@GetMapping("/claims/{pid}")
+	public PatientClaimDetails getClaimByPid(@PathVariable("pid") int pid){
+		return patientClaimDetailsService.findByPid(pid);
+	}
+	
+	@PostMapping("/addclaim")
+	public PatientClaimDetails addClaims(@RequestBody PatientClaimDetails patientClaimDetails) {
+		return patientClaimDetailsService.addClaims(patientClaimDetails);
+	}
+	
+	@PutMapping("/claims/{claimid}")
+	public PatientClaimDetails updateClaim(@RequestBody PatientClaimDetails patientClaimDetails, @PathVariable("claimid") int claimId) {
+		return patientClaimDetailsService.updateClaim(patientClaimDetails, claimId);
+	}
+	
+	@DeleteMapping("/claims/{claimid}")
+	public String deleteClaim(@PathVariable("claimid") int claimId) {
+		return patientClaimDetailsService.deleteClaim(claimId);
+	}
+	
 	@GetMapping("/plans")
 	public List<PatientInsurancePlan> getPlans(){
 		return patientInsurancePlanService.findAll();
 	}
 	
-	@GetMapping("/claims/{pid}")
-		public PatientClaimDetails getClaimByPid(@PathVariable("pid") int pid){
-		return patientClaimDetailsService.findByPid(pid);
-	}
-	
 	@GetMapping("/plans/{pid}")
 	public PatientInsurancePlan getInsuranceByPid(@PathVariable("pid") int pid){
 	return patientInsurancePlanService.findByPid(pid);
-}
-	
+	}
 }
