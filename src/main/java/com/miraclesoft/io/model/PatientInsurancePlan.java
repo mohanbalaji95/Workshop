@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="PATIENT_INSURANCE_PLAN")
@@ -15,14 +17,20 @@ public class PatientInsurancePlan {
 	@Column(name="INS_ID")
 	private int insId;
 	@Column(name="PID")
+	@NotNull
 	private int pId;
 	@Column(name="MEDICAL_DEDUCTABLE")
+	@NotNull
 	private int medicalDeductable;
 	@Column(name="DENTAL_DEDUCTABLE")
+	@NotNull
 	private int dentalDeductable;
 	@Column(name="PRES_DEDUCTABLE")
+	@NotNull
 	private int presDeductable;
 	@Column(name="DATE")
+	@NotNull
+	@NotEmpty
 	private String date;
 	
 	public PatientInsurancePlan() {

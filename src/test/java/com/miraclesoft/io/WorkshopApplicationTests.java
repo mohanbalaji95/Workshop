@@ -1,82 +1,85 @@
 package com.miraclesoft.io;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
+import com.miraclesoft.io.awt.config.WebSecurityConfig;
+import com.miraclesoft.io.awt.filter.JwtRequestFilter;
 import com.miraclesoft.io.controller.InsuranceController;
-import com.miraclesoft.io.model.PatientClaimDetails;
-import com.miraclesoft.io.repository.PatientClaimDetailsRepo;
-import com.miraclesoft.io.repository.PatientInsurancePlanRepo;
+import com.miraclesoft.io.services.JwtUserDetailsService;
 import com.miraclesoft.io.services.PatientClaimDetailsService;
 import com.miraclesoft.io.services.PatientInsurancePlanService;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(InsuranceController.class)
+//@WebMvcTest(InsuranceController.class)
+@WebAppConfiguration
+@SpringBootTest(classes = InsuranceController.class)
 public class WorkshopApplicationTests {
 
-	@Autowired
-	MockMvc mockMvc; // to use direct rest calls
+//	@Autowired
+//	org.springframework.test.web.servlet.MockMvc mockMvc;
+	
+//	@Autowired
+//	MockMvc mockMvc; // to use direct rest calls
 
 	@MockBean
 	PatientClaimDetailsService patientClaimDetailsService;
 	
 //	@MockBean
 //	PatientClaimDetailsRepo patientClaimDetailsRepo;
+	
+	
+	org.springframework.test.web.servlet.MockMvc mockMvc;
 
 	@MockBean
 	PatientInsurancePlanService patientInsurancePlanService;
 	
+	
+	
+	@MockBean
+	com.miraclesoft.io.awt.filter.JwtAuthenticationEntryPoint JwtAuthenticationEntryPoint;
+	
+	@MockBean
+	JwtUserDetailsService jwtUserDetailsService;
+
+	@MockBean
+	com.miraclesoft.io.awt.service.JwtService JwtService;
+	
+	@MockBean
+	com.miraclesoft.io.awt.util.JWTUtility JWTUtility;
+	
+	@MockBean
+	JwtRequestFilter jwtRequestFilter;
+	
+	@MockBean
+	WebSecurityConfig webSecurityConfig;
+
+	@Autowired
+    private WebApplicationContext wac;
+ 
+    
+    private FilterChainProxy springSecurityFilterChain;
+ 
+ 
+//    @Before
+//    public void setup() {
+//        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+//          .addFilter(springSecurityFilterChain).build();
+//    }
+	
+	
+	
 	@Test
 	public void contextLoads() throws Exception {
-		
-//		PatientClaimDetails patientClaimDetails = new PatientClaimDetails(1, 123, 10, 2000, 1000, "2019-01-01", "apollo");
-//		
-//		List<PatientClaimDetails> allClaims = Arrays.asList(patientClaimDetails);
-//		
-//		given(patientClaimDetailsService.findAll()).willReturn(allClaims);
-
-		
-		
-		
-		
-		
-//		 when(patientClaimDetailsRepo.findAll()).thenReturn(Collections.emptyList());
-//
-//		MvcResult mvcResult1= mockMvc.perform(                        //using mock mvc builder we can handle the mockMvc
-//				MockMvcRequestBuilders.get("/claims")
-//				.accept(MediaType.APPLICATION_JSON)
-//				).andReturn();
-//		
-//		System.out.println("Response:"+mvcResult1.getResponse());
-//
-//		 verify(patientClaimDetailsRepo).findAll();
-		/*---------------------------------*/
-//		
-//		 when(patientInsurancePlanRepo.findAll()).thenReturn(Collections.emptyList());
-//
-//			MvcResult mvcResult2= mockMvc.perform(                        //using mock mvc builder we can handle the mockMvc
-//					MockMvcRequestBuilders.get("/plans")
-//					.accept(MediaType.APPLICATION_JSON)
-//					).andReturn();
-//			
-//			System.out.println("Response:"+mvcResult2.getResponse());
-//
-//			 verify(patientInsurancePlanRepo).findAll();
-//	
+	
 	}
 }

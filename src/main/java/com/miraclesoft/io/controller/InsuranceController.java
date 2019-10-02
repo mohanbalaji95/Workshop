@@ -2,6 +2,8 @@ package com.miraclesoft.io.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +38,7 @@ public class InsuranceController {
 	}
 	
 	@PostMapping("/addclaim")
-	public PatientClaimDetails addClaims(@RequestBody PatientClaimDetails patientClaimDetails) {
+	public PatientClaimDetails addClaims(@Valid @RequestBody PatientClaimDetails patientClaimDetails) {
 		return patientClaimDetailsService.addClaims(patientClaimDetails);
 	}
 	
@@ -58,5 +60,20 @@ public class InsuranceController {
 	@GetMapping("/plans/{pid}")
 	public PatientInsurancePlan getInsuranceByPid(@PathVariable("pid") int pid){
 	return patientInsurancePlanService.findByPid(pid);
+	}
+	
+	@PostMapping("/addplans")
+	public PatientInsurancePlan addPlan(@Valid @RequestBody PatientInsurancePlan patientInsurancePlan) {
+		return patientInsurancePlanService.addPlan(patientInsurancePlan);
+	}
+	
+	@PutMapping("/plan/{insid}")
+	public PatientInsurancePlan updatePlan(@RequestBody PatientInsurancePlan patientInsurancePlan, @PathVariable("insid") int insId) {
+		return patientInsurancePlanService.updatePlan(patientInsurancePlan, insId);
+	}
+	
+	@DeleteMapping("/plan/{insid}")
+	public String deletePlan(@PathVariable("insid") int insId) {
+		return patientInsurancePlanService.deletePlan(insId);
 	}
 }
