@@ -1,11 +1,16 @@
 package com.miraclesoft.entity;
 
+import java.util.Random;
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="USERS")
@@ -16,11 +21,17 @@ public class UserDetail {
 	private Integer userid;
 	
 	@Column
+	@Min(message = "AGE min val is 10", value = 10)
+	@NotNull(message = "Please provide age of the person")
 	private int age;
 	@Column
 	private int height;
 	@Column
 	private int weight;
+	
+	public UserDetail(Integer age) {
+		this.age = age;
+	}
 	
 	public Integer getUserid() {
 		return userid;

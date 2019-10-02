@@ -14,13 +14,21 @@ import com.miraclesoft.repository.UserRepository;
 public class UserService {
 
 	@Autowired
-    UserRepository userDao;
+    UserRepository userRepository;
 
     public List<UserDetail> getAllUsers() {
-        return this.userDao.findAll();
+        return this.userRepository.findAll();
     }
 
     public UserDetail addUser(UserDetail user) {
-        return this.userDao.save(user);
+        return this.userRepository.save(user);
+    }
+    
+    public UserDetail getUserWithId(Integer id) {
+    	return this.userRepository.getUserWithId(id);
+    }
+    
+    public List<UserDetail> findAll() {
+    	return this.userRepository.findAll();
     }
 }
