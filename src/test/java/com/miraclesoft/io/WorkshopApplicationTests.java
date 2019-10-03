@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.web.FilterChainProxy;
@@ -23,6 +24,7 @@ import com.miraclesoft.io.services.PatientInsurancePlanService;
 //@WebMvcTest(InsuranceController.class)
 @WebAppConfiguration
 @SpringBootTest(classes = InsuranceController.class)
+@AutoConfigureMockMvc
 public class WorkshopApplicationTests {
 
 //	@Autowired
@@ -37,7 +39,7 @@ public class WorkshopApplicationTests {
 //	@MockBean
 //	PatientClaimDetailsRepo patientClaimDetailsRepo;
 	
-	
+	@Autowired
 	org.springframework.test.web.servlet.MockMvc mockMvc;
 
 	@MockBean
